@@ -1,0 +1,7 @@
+Marta Pastor Puente
+Marcos Calero Fernandez
+
+laboratorio 04 
+puesto 15
+
+Se incluye my-fsck-static-64 para el script
