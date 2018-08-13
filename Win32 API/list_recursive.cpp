@@ -34,7 +34,7 @@ void list_files_recursive(string init_path) {
 	WIN32_FIND_DATA ffd;
 	HANDLE hFind;
 
-	cout << init_path << "\n";
+	//cout << init_path << "\n";
 
 	hFind = FindFirstFileA((init_path + "\\*").c_str(), &ffd);
 
@@ -43,21 +43,32 @@ void list_files_recursive(string init_path) {
 		do
 		{
 			//if find a directory NOT . or ..
-			if (ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY && strcmp(ffd.cFileName, ".") != 0
-				&& strcmp(ffd.cFileName, "..") != 0) {
+			if (ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY){
 
-				cout << "<DIR> " << ffd.cFileName << "\n";
+				if (strcmp(ffd.cFileName, ".") != 0 && strcmp(ffd.cFileName, "..") != 0) {
 
-				//list files on init_path + "\\" + (folder = ffd.cFileName)
-				list_files_recursive(init_path + "\\" + ffd.cFileName);
+					cout << "<DIR> " << ffd.cFileName << "\n";
+
+					//list files on init_path + "\\" + (folder = ffd.cFileName)
+					list_files_recursive(init_path + "\\" + ffd.cFileName);
+
+				}
 			}
 
 			//if find a file
 			else {
-				cout << ffd.cFileName << "\n";
+				cout << "    " << ffd.cFileName << "\n";
 			}
 
 		} while (FindNextFile(hFind, &ffd) != 0);
+	}
+
+	FindClose(hFind);
+
+	DWORD dwError = GetLastError();
+	if (dwError != ERROR_NO_MORE_FILES)
+	{
+		cout << "Error happened \n";
 	}
 }
 
