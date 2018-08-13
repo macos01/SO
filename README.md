@@ -1,2 +1,7 @@
 # SO
-Practicas asignatura Sistemas Operativos
+Sistemas operativos 
+
+c
+c++
+Win32 Api
+
